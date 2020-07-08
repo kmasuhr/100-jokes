@@ -12,7 +12,7 @@ export class BashOrgService {
     constructor(private httpService: HttpService) {
     }
 
-    private static parseJokes(rawHtml: string) {
+    private static parseJokesPage(rawHtml: string): string[] {
         const page = parse(rawHtml);
         return page.querySelectorAll('.post-body')
             .map(html => html.text.replace(/(\r\n|\n|\r|\t)/gm, ''))
@@ -21,13 +21,13 @@ export class BashOrgService {
     getJokes(numberOfJokes = 10): Observable<string[]> {
         const numberOfPages = Math.ceil(numberOfJokes / BashOrgService.JOKES_PER_PAGE);
 
-        return forkJoin(this.getListOfObservables(numberOfPages)).pipe(
-            map((responses: AxiosResponse[]) => responses.map(response => BashOrgService.parseJokes(response.data))),
+        return forkJoin(this.getListOfHttpCallsForPage(numberOfPages)).pipe(
+            map((responses: AxiosResponse[]) => responses.map(response => BashOrgService.parseJokesPage(response.data))),
             map((responses: Array<Array<string>>) => this.mergeAllPages(responses, numberOfJokes))
         )
     }
 
-    private getListOfObservables(numberOfPages: number): Observable<AxiosResponse>[] {
+    private getListOfHttpCallsForPage(numberOfPages: number): Observable<AxiosResponse>[] {
         const allRequests = []
 
         Array.from({length: numberOfPages}, (x, index) => {
