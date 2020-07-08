@@ -1,13 +1,14 @@
 import {Controller, Get} from '@nestjs/common';
-import {AppService} from './app.service';
+import {BashOrgService} from "./servieces/bash-org.service";
+import {Observable} from "rxjs";
 
 @Controller()
 export class AppController {
-    constructor(private readonly appService: AppService) {
+    constructor(private readonly bashOrgService: BashOrgService) {
     }
 
     @Get()
-    getHello(): string {
-        return this.appService.getHello();
+    getHello(): Observable<string[]> {
+        return this.bashOrgService.getJokes(100);
     }
 }
