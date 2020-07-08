@@ -11,6 +11,7 @@ module "networking" {
 module "computing" {
   source = "./computing"
 
+  default_security_group_id = module.networking.default_security_group_id
   public_key_path = var.public_key_path
   subnet_id = module.networking.subnet_id
 }
