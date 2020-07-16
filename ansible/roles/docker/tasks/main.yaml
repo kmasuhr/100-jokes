@@ -1,0 +1,41 @@
+---
+- name: Install docker dependencies
+  apt:
+    name:
+      - apt-transport-https
+      - gnupg2
+      - ca-certificates
+    state: present
+
+- name: Add Docker apt key
+  apt_key:
+    url: "{{ docker_apt_gpg_key }}"
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    state: present
+  register: add_repository_key
+
+- name: Add Docker repository
+  apt_repository:
+    repo: "{{ docker_apt_repository }}"
+    state: present
+    update_cache: true
+
+- name: Install Docker
+  package:
+    name: docker-ce
+    state: present
+  notify: Restart docker
+
+- name: Install docker-compose
+  apt:
+    name: docker-compose
+    state: present
+
+- name: Install docker dependencies (python)
+  pip:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - PyYAML
+    - docker
+    - docker-compose
