@@ -1,0 +1,9 @@
+---
+- name: Prepare EC2
+  hosts: all
+  become: yes
+  gather_facts: yes
+  strategy: free
+  roles:
+    - { role: main }
+

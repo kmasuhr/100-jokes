@@ -1,0 +1,11 @@
+---
+- name: Upgrade all installed packages
+  apt:
+    name: "*"
+    state: latest
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Install pip
+  apt:
+    name: python3-pip
