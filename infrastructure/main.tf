@@ -15,3 +15,7 @@ module "computing" {
   public_key_path = var.public_key_path
   subnet_id = module.networking.subnet_id
 }
+
+output "main_vm_public_ip" {
+  value = module.computing.main_public_ip
+}

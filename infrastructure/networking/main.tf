@@ -57,3 +57,16 @@ resource "aws_security_group_rule" "ingress_ssh" {
     "0.0.0.0/0"
   ]
 }
+
+resource "aws_security_group_rule" "ingress_jenkins" {
+  security_group_id = aws_security_group.main.id
+  type = "ingress"
+
+  from_port = 0
+  to_port = 8080
+  protocol = "tcp"
+
+  cidr_blocks = [
+    "0.0.0.0/0"
+  ]
+}
