@@ -6,9 +6,9 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                checkout
+                sh 'ls -l'
             }
         }
     }
