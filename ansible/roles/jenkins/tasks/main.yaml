@@ -1,0 +1,10 @@
+---
+- name: Clone git repository with Jenkins config
+  git:
+    repo: https://github.com/kazurrr/100-jokes.git
+    dest: /var/opt/100-jokes
+
+- name: Run Jenkins in Docker container
+  docker_compose:
+    project_src: /var/opt/100-jokes/jenkins
+    state: present
