@@ -9,7 +9,7 @@ services:
       - 'jenkins_home:/var/jenkins_home'
     restart: always
 
-  # ToDo add nginx with ssl
+  # ToDo add nginx with ssl for jenkins and application
 
 volumes:
   jenkins_home:
