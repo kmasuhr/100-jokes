@@ -15,7 +15,7 @@ pipeline {
     stage('Deploy') {
       steps {
         sh "docker kill app || true"
-        sh "docker run -p 3000:3000 --name app 100-jokes:0.1.${env.BUILD_NUMBER}"
+        sh "docker run -d -p 3000:3000 --name app 100-jokes:0.1.${env.BUILD_NUMBER}"
       }
     }
   }
