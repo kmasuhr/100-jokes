@@ -10,5 +10,5 @@ variable "cidr_subnet" {
 
 variable "public_key_path" {
   type = string
-  default = "~/.ssh/scalac/id_rsa.pub"
+  default = "~/.ssh/scalac/id_rsa"
 }
