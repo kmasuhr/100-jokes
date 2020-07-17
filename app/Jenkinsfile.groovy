@@ -6,8 +6,7 @@ pipeline {
   }
 
   environment {
-    isDeployable = env.BRANCH_NAME == "develop"
-    dockerVersionSuffix = "0.1.${env.isDeployable ? '' : 'SNAPSHOT-'}"
+    dockerVersionSuffix = "0.1.${env.BRANCH_NAME == "develop" ? '' : 'SNAPSHOT-'}"
   }
 
   stages {
