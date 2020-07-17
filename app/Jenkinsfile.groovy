@@ -12,6 +12,8 @@ pipeline {
       }
     }
 
+    // ToDo add unit testing, vulnerability scanning
+
     stage('Deploy') {
       steps {
         sh "docker kill app || true && docker rm app || true"
