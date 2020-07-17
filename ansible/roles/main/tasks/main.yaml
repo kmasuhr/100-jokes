@@ -6,6 +6,11 @@
     update_cache: yes
     force_apt_get: yes
 
+- name: Install Java runtime
+  apt:
+    name: "default-jre"
+    state: present
+
 - name: Install pip
   apt:
     name: python3-pip
